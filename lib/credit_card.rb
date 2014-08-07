@@ -9,13 +9,29 @@ module CreditCard
       MasterCard
     elsif card_number.start_with? '4'
       Visa
-    end.new
+    end.new card_number
   end
 
   class Base
+
+    attr_reader :card_number
+
+    def initialize(card_number)
+      @card_number = card_number
+    end
+
+    def valid_length?
+      false
+    end
+
   end
 
   class AmEx < Base
+
+    def valid_length?
+      card_number.length == 15
+    end
+
   end
 
   class Discover < Base
