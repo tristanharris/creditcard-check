@@ -2,26 +2,29 @@ module CreditCard
 
   def self.build(card_number)
     if %w(34 37).include? card_number[0..1]
-      AmEx.new
+      AmEx
     elsif card_number.start_with? '6011'
-      Discover.new
+      Discover
     elsif ('51'..'55').include? card_number[0..1]
-      MasterCard.new
+      MasterCard
     elsif card_number.start_with? '4'
-      Visa.new
-    end
+      Visa
+    end.new
   end
 
-  class AmEx
+  class Base
   end
 
-  class Discover
+  class AmEx < Base
   end
 
-  class MasterCard
+  class Discover < Base
   end
 
-  class Visa
+  class MasterCard < Base
+  end
+
+  class Visa < Base
   end
 
 end
