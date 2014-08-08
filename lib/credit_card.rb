@@ -11,6 +11,8 @@ module CreditCard
       MasterCard
     elsif card_number.start_with? '4'
       Visa
+    else
+      Unknown
     end.new card_number
   end
 
@@ -83,6 +85,18 @@ module CreditCard
 
     def valid_length?
       card_number.length == 13 || card_number.length == 16
+    end
+
+  end
+
+  class Unknown < Base
+
+    def self.card_name
+      'Unknown'
+    end
+
+    def valid?
+      false
     end
 
   end
