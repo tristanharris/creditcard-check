@@ -42,4 +42,20 @@ describe CreditCard do
 
   end
 
+  describe 'to_s' do
+    {
+      '4111111111111111'    => 'VISA: 4111111111111111       (valid)',
+      '4111111111111'       => 'VISA: 4111111111111          (invalid)',
+      '4012888888881881'    => 'VISA: 4012888888881881       (valid)',
+      '378282246310005'     => 'AMEX: 378282246310005        (valid)',
+      '6011111111111117'    => 'Discover: 6011111111111117   (valid)',
+      '5105105105105100'    => 'MasterCard: 5105105105105100 (valid)'
+    }.each_pair do |card_number, description|
+      context "for card number #{card_number}" do
+        subject { CreditCard.build card_number }
+        it { expect(subject.to_s).to eq(description) }
+      end
+    end
+  end
+
 end

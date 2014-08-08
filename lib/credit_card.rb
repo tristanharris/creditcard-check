@@ -32,9 +32,18 @@ module CreditCard
       valid_length? && luhn_valid?(card_number)
     end
 
+    def to_s
+      description = self.class.card_name + ": #{card_number}"
+      description + ' ' * (29 - description.length) + (valid? ? '(valid)' : '(invalid)')
+    end
+
   end
 
   class AmEx < Base
+
+    def self.card_name
+      'AMEX'
+    end
 
     def valid_length?
       card_number.length == 15
@@ -44,6 +53,10 @@ module CreditCard
 
   class Discover < Base
 
+    def self.card_name
+      'Discover'
+    end
+
     def valid_length?
       card_number.length == 16
     end
@@ -52,6 +65,10 @@ module CreditCard
 
   class MasterCard < Base
 
+    def self.card_name
+      'MasterCard'
+    end
+
     def valid_length?
       card_number.length == 16
     end
@@ -59,6 +76,10 @@ module CreditCard
   end
 
   class Visa < Base
+
+    def self.card_name
+      'VISA'
+    end
 
     def valid_length?
       card_number.length == 13 || card_number.length == 16
