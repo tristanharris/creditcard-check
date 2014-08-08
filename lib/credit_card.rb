@@ -1,3 +1,5 @@
+require_relative 'luhn'
+
 module CreditCard
 
   def self.build(card_number)
@@ -14,6 +16,8 @@ module CreditCard
 
   class Base
 
+    include Luhn
+
     attr_reader :card_number
 
     def initialize(card_number)
@@ -22,6 +26,10 @@ module CreditCard
 
     def valid_length?
       false
+    end
+
+    def valid?
+      valid_length? && luhn_valid?(card_number)
     end
 
   end
