@@ -23,7 +23,7 @@ module CreditCard
     attr_reader :card_number
 
     def initialize(card_number)
-      @card_number = card_number
+      @card_number = card_number.gsub(/\s/, '')
     end
 
     def valid_length?

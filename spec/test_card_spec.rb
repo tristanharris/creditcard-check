@@ -10,6 +10,12 @@ end
 
 describe TestCard do
 
+  describe 'create' do
+    it 'removes white space from the card number' do
+      expect(TestCard.new('  123 456  789 ').card_number).to eq('123456789')
+    end
+  end
+
   context 'with a correct card number length' do
     subject { described_class.new '123456789012345' }
     it { is_expected.to be_valid_length }
