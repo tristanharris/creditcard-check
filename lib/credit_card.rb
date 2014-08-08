@@ -43,12 +43,27 @@ module CreditCard
   end
 
   class Discover < Base
+
+    def valid_length?
+      card_number.length == 16
+    end
+
   end
 
   class MasterCard < Base
+
+    def valid_length?
+      card_number.length == 16
+    end
+
   end
 
   class Visa < Base
+
+    def valid_length?
+      card_number.length == 13 || card_number.length == 16
+    end
+
   end
 
 end
