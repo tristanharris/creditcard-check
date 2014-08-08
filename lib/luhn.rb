@@ -7,7 +7,7 @@ module Luhn
   def double_every_other(data)
     data.each_with_index.map do |char, index|
       multiplier = index % 2 == 0 ? 1 : 2
-      value = char.to_i * multiplier
+      char.to_i * multiplier
     end
   end
 
